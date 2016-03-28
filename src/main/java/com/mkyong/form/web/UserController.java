@@ -65,7 +65,11 @@ public class UserController {
 	public String showAllUsers(Model model) {
 
 		logger.debug("showAllUsers()");
-		model.addAttribute("users", userService.findAll());
+		
+		List <User> listUsers =userService.findAll();
+		model.addAttribute("users", listUsers );
+		model.addAttribute("countUsers",listUsers.size());
+		
 		return "users/list";
 
 	}

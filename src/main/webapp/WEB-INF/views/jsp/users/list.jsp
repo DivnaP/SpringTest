@@ -22,6 +22,9 @@
 		</c:if>
 
 		<h1>All Users</h1>
+		</br>
+
+		<h3>Total number of users is ${countUsers} </h3>
 
 		<table class="table table-striped">
 			<thead>
