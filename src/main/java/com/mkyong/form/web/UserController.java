@@ -41,7 +41,7 @@ public class UserController {
 
 	@Autowired
 	UserFormValidator userFormValidator;
-	
+
 	@InitBinder
 	protected void initBinder(WebDataBinder binder) {
 		binder.setValidator(userFormValidator);
@@ -72,25 +72,25 @@ public class UserController {
 
 	// save or update user
 	@RequestMapping(value = "/users", method = RequestMethod.POST)
-	public String saveOrUpdateUser(@ModelAttribute("userForm") @Validated User user,
-			BindingResult result, Model model, final RedirectAttributes redirectAttributes) {
+	public String saveOrUpdateUser(@ModelAttribute("userForm") @Validated User user, BindingResult result, Model model,
+			final RedirectAttributes redirectAttributes) {
 
 		logger.debug("saveOrUpdateUser() : {}", user);
 
 		if (result.hasErrors()) {
-			populateDefaultModel(model);
+		//	populateDefaultModel(model);
 			return "users/userform";
 		} else {
 
 			redirectAttributes.addFlashAttribute("css", "success");
-			if(user.isNew()){
+			if (user.isNew()) {
 				redirectAttributes.addFlashAttribute("msg", "User added successfully!");
-			}else{
+			} else {
 				redirectAttributes.addFlashAttribute("msg", "User updated successfully!");
 			}
-			
+
 			userService.saveOrUpdate(user);
-			
+
 			// POST/REDIRECT/GET
 			return "redirect:/users/" + user.getId();
 
@@ -113,8 +113,8 @@ public class UserController {
 		user.setName("mkyong123");
 		user.setEmail("test@gmail.com");
 		user.setAddress("abc 88");
-		//user.setPassword("123");
-		//user.setConfirmPassword("123");
+		// user.setPassword("123");
+		// user.setConfirmPassword("123");
 		user.setNewsletter(true);
 		user.setSex("M");
 		user.setFramework(new ArrayList<String>(Arrays.asList("Spring MVC", "GWT")));
@@ -124,7 +124,7 @@ public class UserController {
 
 		model.addAttribute("userForm", user);
 
-		populateDefaultModel(model);
+	//	populateDefaultModel(model);
 
 		return "users/userform";
 
@@ -138,9 +138,9 @@ public class UserController {
 
 		User user = userService.findById(id);
 		model.addAttribute("userForm", user);
-		
-		populateDefaultModel(model);
-		
+
+	//	populateDefaultModel(model);
+
 		return "users/userform";
 
 	}
@@ -152,10 +152,10 @@ public class UserController {
 		logger.debug("deleteUser() : {}", id);
 
 		userService.delete(id);
-		
+
 		redirectAttributes.addFlashAttribute("css", "success");
 		redirectAttributes.addFlashAttribute("msg", "User is deleted!");
-		
+
 		return "redirect:/users";
 
 	}
@@ -177,7 +177,8 @@ public class UserController {
 
 	}
 
-	private void populateDefaultModel(Model model) {
+	@ModelAttribute("frameworkList")
+	private List<String> populateFrameworkList(Model model) {
 
 		List<String> frameworksList = new ArrayList<String>();
 		frameworksList.add("Spring MVC");
@@ -186,7 +187,13 @@ public class UserController {
 		frameworksList.add("GWT");
 		frameworksList.add("Play");
 		frameworksList.add("Apache Wicket");
-		model.addAttribute("frameworkList", frameworksList);
+		return frameworksList;
+
+	}
+
+	
+	@ModelAttribute("javaSkillList")
+	private Map<String, String> populateJavaSkillList(Model model) {
 
 		Map<String, String> skill = new LinkedHashMap<String, String>();
 		skill.put("Hibernate", "Hibernate");
@@ -196,20 +203,32 @@ public class UserController {
 		skill.put("Grails", "Grails");
 		model.addAttribute("javaSkillList", skill);
 
+		return skill;
+
+	}
+
+	@ModelAttribute("numberList")
+	private List<Integer> populateNumberList(Model model) {
+
 		List<Integer> numbers = new ArrayList<Integer>();
 		numbers.add(1);
 		numbers.add(2);
 		numbers.add(3);
 		numbers.add(4);
 		numbers.add(5);
-		model.addAttribute("numberList", numbers);
+		return numbers;
+
+	}
+
+	@ModelAttribute("countryList")
+	private Map<String, String> populateCountryList(Model model) {
 
 		Map<String, String> country = new LinkedHashMap<String, String>();
 		country.put("US", "United Stated");
 		country.put("CN", "China");
 		country.put("SG", "Singapore");
 		country.put("MY", "Malaysia");
-		model.addAttribute("countryList", country);
+		return country;
 
 	}
 
