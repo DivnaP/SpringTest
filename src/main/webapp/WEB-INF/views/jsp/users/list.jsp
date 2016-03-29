@@ -13,25 +13,26 @@
 
 
 <script type="text/javascript">
-
-
-function chooseSex(){
 	
-	var choosenSex = $("input[name=gender]:checked").val();
-	//alert(choosenSex);
-	  $.ajax({
-	      type : "GET", 
-          url: 'http://localhost:8080/spring-mvc-form/users/gender',
-          data: "sex="+choosenSex,
-          success: function (data) {
-              console.log('response=', data);
-          }
-      });
-	
-	
-}
+		function chooseSex() {
 
+			var choosenSex = $("input[name=gender]:checked").val();
+			//alert(choosenSex);
+			$.ajax({
+				async : true,
+				type : "GET",
+				url : 'http://localhost:8080/spring-mvc-form/users/gender',
+				data : "sex=" + choosenSex,
+
+				success : function(data) {
+					//console.log('response=', data);
+
+				}
+			});
+
+		}
 </script>
+
 	<div class="container">
 
 		<c:if test="${not empty msg}">
@@ -48,16 +49,17 @@ function chooseSex(){
 		</br>
 
 		<h3>Total number of users is ${countUsers}</h3>
-		</br>
- Choose sex:
-<label class="radio-inline">
+		</br> Choose sex: </br>
 
-  <input id="radioM" type="radio" name="gender" value="M" onclick="chooseSex()"> Male<br>
-  <input type="radio" name="gender" value="F" onclick="chooseSex()"> Female<br>
- 
-</label>
-	 <br />
-		
+		<form method="get" action="/spring-mvc-form/users/gender" id="form">
+			<label class="radio-inline">
+			 <input type="radio" name="sex" value="M" onclick="this.form.submit()"> Male </br>
+			 <input type="radio" name="sex" value="F" onclick="this.form.submit()"> Female
+
+			</label>
+		</form>
+		<br />
+
 		<table class="table table-striped">
 			<thead>
 				<tr>

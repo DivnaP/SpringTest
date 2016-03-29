@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -80,20 +81,23 @@ public class UserController {
 	// AJAX???poziv
 	// list page SEX
 		@RequestMapping(value = "/users/gender", method = RequestMethod.GET)
+		
 		public String showSexUsers(@RequestParam(value = "sex") String sex ,Model model) {
 
 			logger.debug("showAllUsersSEx()");
 			
 			List <User> listUsers =userService.findAll();
-		List <User> selectedUsers = new ArrayList<User>(); 
+		List <User> selectedUsers =new ArrayList<User>();
+		
 		
 			for (User user : listUsers) {
+				
 				if (user.getSex().equals(sex.trim())) 
 					selectedUsers.add(user);
 					
 			}
 			model.addAttribute("users", selectedUsers );
-			
+		
 			return "users/list";
 
 		}
