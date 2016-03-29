@@ -167,7 +167,7 @@
 		
 		<spring:bind path="birthdate">
 			<div class="form-group ${status.error ? 'has-error' : ''}">
-				<label class="col-sm-2 control-label">Name</label>
+				<label class="col-sm-2 control-label">Birth date:</label>
 				<div class="col-sm-5">
 					<form:input path="birthdate" type="date" class="form-control " id="birthdate" placeholder="Birth date" />
 					<form:errors path="birthdate" class="control-label" />
