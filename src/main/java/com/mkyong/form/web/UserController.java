@@ -79,14 +79,20 @@ public class UserController {
 	
 	// AJAX???poziv
 	// list page SEX
-		@RequestMapping(value = "/users/sex", method = RequestMethod.GET)
-		public String showSexUsers(@RequestParam("sex") String sex ,Model model) {
+		@RequestMapping(value = "/users/gender", method = RequestMethod.GET)
+		public String showSexUsers(@RequestParam(value = "sex") String sex ,Model model) {
 
-			logger.debug("showAllUsers()");
+			logger.debug("showAllUsersSEx()");
 			
 			List <User> listUsers =userService.findAll();
-			
-			model.addAttribute("users", listUsers );
+		List <User> selectedUsers = new ArrayList<User>(); 
+		
+			for (User user : listUsers) {
+				if (user.getSex().equals(sex.trim())) 
+					selectedUsers.add(user);
+					
+			}
+			model.addAttribute("users", selectedUsers );
 			
 			return "users/list";
 

@@ -11,25 +11,18 @@
 
 <body>
 
-<script>
+
+<script type="text/javascript">
 
 
 function chooseSex(){
 	
-	var choosenSex ;
-	 if($('#radioM').is(':checked')) { 	
-		 choosenSex =$("#radioM").value; }
-	 else{
-		 choosenSex =$("#radioF").value;
-	 }
-	 
-
+	var choosenSex = $("input[name=gender]:checked").val();
+	//alert(choosenSex);
 	  $.ajax({
-          url: '/spring-mvc-form/users/sex',
-          data: {
-              sex: choosenSex
-          /*  extraParam: 'foo' */
-          },
+	      type : "GET", 
+          url: 'http://localhost:8080/spring-mvc-form/users/gender',
+          data: "sex="+choosenSex,
           success: function (data) {
               console.log('response=', data);
           }
@@ -59,7 +52,7 @@ function chooseSex(){
  Choose sex:
 <label class="radio-inline">
 
-  <input id="radioM" type="radio" name="gender" value="M" onclick="chooseSex()" checked> Male<br>
+  <input id="radioM" type="radio" name="gender" value="M" onclick="chooseSex()"> Male<br>
   <input type="radio" name="gender" value="F" onclick="chooseSex()"> Female<br>
  
 </label>
