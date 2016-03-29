@@ -1,5 +1,10 @@
 package com.mkyong.form.validator;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -30,6 +35,26 @@ public class UserFormValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 
 		User user = (User) target;
+		
+		Date date = new Date();
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            date = formatter.parse(user.getBirthdate());
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        Date today = new Date();
+
+        if (today.before(date)) {
+            errors.rejectValue("birthdate", "Valid.userForm.birthdate");
+        }
+
+        long diff = today.getTime() - date.getTime();
+        long diffDays = diff / (24 * 60 * 60 * 1000);
+
+        if (diffDays < 6570 && diffDays>0)
+            errors.rejectValue("birthdate", "Valid18.userForm.birthdate");
 
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "NotEmpty.userForm.name");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "NotEmpty.userForm.email");
@@ -38,6 +63,7 @@ public class UserFormValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "confirmPassword","NotEmpty.userForm.confirmPassword");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "sex", "NotEmpty.userForm.sex");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "country", "NotEmpty.userForm.country");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "birthdate", "NotEmpty.userForm.birthdate");
 
 		if(!emailValidator.valid(user.getEmail())){
 			errors.rejectValue("email", "Pattern.userForm.email");

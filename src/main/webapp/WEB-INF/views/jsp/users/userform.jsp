@@ -167,12 +167,10 @@
 		
 		<spring:bind path="birthdate">
 			<div class="form-group ${status.error ? 'has-error' : ''}">
-				<label class="col-sm-2 control-label">Birth date:</label>
-				<div class="col-sm-10">
-					<div class="input-append date" id="dp3" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
- 					<input class="span2" size="16" type="date" value="12-02-2012">
- 					<span class="add-on"><i class="icon-th"></i></span>
-				</div>
+				<label class="col-sm-2 control-label">Name</label>
+				<div class="col-sm-5">
+					<form:input path="birthdate" type="date" class="form-control " id="birthdate" placeholder="Birth date" />
+					<form:errors path="birthdate" class="control-label" />
 				</div>
 			</div>
 		</spring:bind>
