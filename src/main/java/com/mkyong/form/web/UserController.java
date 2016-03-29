@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -73,6 +74,23 @@ public class UserController {
 		return "users/list";
 
 	}
+	
+	
+	
+	// AJAX???poziv
+	// list page SEX
+		@RequestMapping(value = "/users/sex", method = RequestMethod.GET)
+		public String showSexUsers(@RequestParam("sex") String sex ,Model model) {
+
+			logger.debug("showAllUsers()");
+			
+			List <User> listUsers =userService.findAll();
+			
+			model.addAttribute("users", listUsers );
+			
+			return "users/list";
+
+		}
 
 	// save or update user
 	@RequestMapping(value = "/users", method = RequestMethod.POST)
