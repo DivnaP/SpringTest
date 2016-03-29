@@ -164,6 +164,18 @@
 				<div class="col-sm-5"></div>
 			</div>
 		</spring:bind>
+		
+		<spring:bind path="birthdate">
+			<div class="form-group ${status.error ? 'has-error' : ''}">
+				<label class="col-sm-2 control-label">Birth date:</label>
+				<div class="col-sm-10">
+					<div class="input-append date" id="dp3" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+ 					<input class="span2" size="16" type="text" value="12-02-2012">
+ 					<span class="add-on"><i class="icon-th"></i></span>
+				</div>
+				</div>
+			</div>
+		</spring:bind>
 
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">

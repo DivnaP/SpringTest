@@ -30,6 +30,7 @@ public class User {
 	// form:radiobutton - radio button
 	String sex;
 
+
 	// form:radiobuttons - radio button
 	Integer number;
 
@@ -38,6 +39,9 @@ public class User {
 
 	// form:select - multiple=true - dropdown - multiple select
 	List<String> skill;
+	
+	// date of birth
+	String birthdate;
 
 	public boolean isNew() {
 		return (this.id == null);
@@ -137,6 +141,14 @@ public class User {
 
 	public void setSkill(List<String> skill) {
 		this.skill = skill;
+	}
+	
+	public String getBirthdate() {
+		return birthdate;
+	}
+
+	public void setBirthdate(String birthdate) {
+		this.birthdate = birthdate;
 	}
 
 	@Override

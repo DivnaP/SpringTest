@@ -1,3 +1,3 @@
-INSERT INTO users (name, email, framework, sex) VALUES ('mkyong', 'mkyong@gmail.com', 'Spring MVC, GWT', 'F');
-INSERT INTO users (name, email, framework, sex) VALUES ('alex', 'alex@yahoo.com', 'Spring MVC, PLAY', 'M');
-INSERT INTO users (name, email, framework, sex) VALUES ('joel', 'joel@gmail.com', 'Spring MVC, JSF 2', 'M');
+INSERT INTO users (name, email, framework, sex, birthdate) VALUES ('mkyong', 'mkyong@gmail.com', 'Spring MVC, GWT', 'F', '12-03-1995');
+INSERT INTO users (name, email, framework, sex, birthdate) VALUES ('alex', 'alex@yahoo.com', 'Spring MVC, PLAY', 'M', '29-10-1998');
+INSERT INTO users (name, email, framework, sex, birthdate) VALUES ('joel', 'joel@gmail.com', 'Spring MVC, JSF 2', 'M', '12-05-1999');

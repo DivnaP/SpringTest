@@ -71,8 +71,8 @@ public class UserDaoImpl implements UserDao {
 
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		
-		String sql = "INSERT INTO USERS(NAME, EMAIL, ADDRESS, PASSWORD, NEWSLETTER, FRAMEWORK, SEX, NUMBER, COUNTRY, SKILL) "
-				+ "VALUES ( :name, :email, :address, :password, :newsletter, :framework, :sex, :number, :country, :skill)";
+		String sql = "INSERT INTO USERS(NAME, EMAIL, ADDRESS, PASSWORD, NEWSLETTER, FRAMEWORK, SEX, NUMBER, COUNTRY, SKILL, BIRTHDATE) "
+				+ "VALUES ( :name, :email, :address, :password, :newsletter, :framework, :sex, :number, :country, :skill, :birthdate)";
 
 		namedParameterJdbcTemplate.update(sql, getSqlParameterByModel(user), keyHolder);
 		user.setId(keyHolder.getKey().intValue());
@@ -83,7 +83,7 @@ public class UserDaoImpl implements UserDao {
 	public void update(User user) {
 
 		String sql = "UPDATE USERS SET NAME=:name, EMAIL=:email, ADDRESS=:address, " + "PASSWORD=:password, NEWSLETTER=:newsletter, FRAMEWORK=:framework, "
-				+ "SEX=:sex, NUMBER=:number, COUNTRY=:country, SKILL=:skill WHERE id=:id";
+				+ "SEX=:sex, NUMBER=:number, COUNTRY=:country, SKILL=:skill, BIRTHDATE=:birthdate WHERE id=:id";
 
 		namedParameterJdbcTemplate.update(sql, getSqlParameterByModel(user));
 
@@ -116,6 +116,7 @@ public class UserDaoImpl implements UserDao {
 		paramSource.addValue("number", user.getNumber());
 		paramSource.addValue("country", user.getCountry());
 		paramSource.addValue("skill", convertListToDelimitedString(user.getSkill()));
+		paramSource.addValue("birthdate", user.getBirthdate());
 
 		return paramSource;
 	}
@@ -135,6 +136,7 @@ public class UserDaoImpl implements UserDao {
 			user.setPassword(rs.getString("password"));
 			user.setSex(rs.getString("sex"));
 			user.setSkill(convertDelimitedStringToList(rs.getString("skill")));
+			user.setBirthdate(rs.getString("birthdate"));
 			return user;
 		}
 	}

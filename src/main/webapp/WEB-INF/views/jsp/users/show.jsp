@@ -72,7 +72,12 @@
 		<label class="col-sm-2">Skill</label>
 		<div class="col-sm-10">${user.skill}</div>
 	</div>
-
+	
+	<div class="row">
+		<label class="col-sm-2">Birth date</label>
+		<div class="col-sm-10">${user.birthdate}</div>
+	</div>
+	
 </div>
 
 <jsp:include page="../fragments/footer.jsp" />
