@@ -24,12 +24,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mkyong.form.model.User;
 import com.mkyong.form.service.UserService;
+import com.mkyong.form.service.UserServiceImpl;
 import com.mkyong.form.validator.UserFormValidator;
 //import javax.validation.Valid;
 
@@ -76,6 +76,25 @@ public class UserController {
 
 	}
 	
+	// Search user
+		@RequestMapping(value = "/users/searchResult", method = RequestMethod.GET)
+		public String searchUsers(@RequestParam (value = "userID") int userID, RedirectAttributes redirectAttributes) {
+			logger.debug("searchUsers()");
+			
+//			model.addAttribute("user", listUsers);
+			redirectAttributes.addFlashAttribute("user", userService.findById(userID));
+			
+			return "redirect:/users/search";
+		}
+		
+	
+		// show Search page
+		@RequestMapping(value = "/users/search", method = RequestMethod.GET)
+		public String showSearchPage() {
+
+			logger.debug("showSearchPage()");			
+			return "/users/search";
+		}	
 	
 	
 	// AJAX???poziv

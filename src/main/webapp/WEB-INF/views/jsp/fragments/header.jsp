@@ -22,16 +22,25 @@
 
 <spring:url value="/" var="urlHome" />
 <spring:url value="/users/add" var="urlAddUser" />
+<spring:url value="/users/search" var="urlSearchUser" />
 
 <nav class="navbar navbar-inverse ">
 	<div class="container">
 		<div class="navbar-header">
 			<a class="navbar-brand" href="${urlHome}">Spring MVC Form</a>
 		</div>
+		
 		<div id="navbar">
 			<ul class="nav navbar-nav navbar-right">
 				<li class="active"><a href="${urlAddUser}">Add User</a></li>
 			</ul>
 		</div>
+		
+		<div id="navbar">
+			<ul class="nav navbar-nav navbar-right">
+				<li class="active"><a href="${urlSearchUser}">Search user</a></li>
+			</ul>
+		</div>
+		
 	</div>
 </nav>
